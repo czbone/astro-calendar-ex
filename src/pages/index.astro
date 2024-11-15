@@ -1,0 +1,10 @@
+---
+import Layout from '@/layouts/FullLayout.astro'
+import Calendar from '@/components/Calendar'
+---
+
+<Layout title="カレンダー">
+  <main class="container mx-auto px-4">
+    <Calendar client:load />
+  </main>
+</Layout>

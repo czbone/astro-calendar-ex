@@ -1,0 +1,101 @@
+---
+import EventModalLink from '@/components/event/EventModalLink'
+import { Icon } from 'astro-icon/components'
+import UserStoreInitializer from '@/components/UserStoreInitializer'
+import { convertToUserAuth } from '@/types/user'
+
+const user = Astro.locals.user
+const userAuth = user ? convertToUserAuth(user) : null  // ユーザ認証情報
+---
+<!-- ログイン時はユーザ情報を取得 -->
+<UserStoreInitializer userAuth={userAuth} client:load />
+
+<nav class="container mx-auto px-4">
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center justify-start">
+        <a href="/" class="ml-2 flex md:mr-24">
+          <img class="mr-3 h-auto w-10" src="/images/logo.png" alt="siteロゴ" />
+          <span class="self-center whitespace-nowrap text-xl font-semibold sm:text-2xl"
+            >AstroQuest</span
+          >
+        </a>
+        {user && (
+        <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1">
+          <ul class="flex flex-col mt-4 space-x-6 font-medium lg:flex-row xl:space-x-8 lg:mt-0">
+            <li>
+                <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 md:w-auto">イベント <svg class="ml-1 w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+                <!-- Dropdown menu -->
+                <div id="dropdownNavbar" class="hidden z-20 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow ring-1 ring-black ring-opacity-5">
+                    <ul class="py-1 text-gray-700" aria-labelledby="dropdownLargeButton">
+                      <li>
+                        <EventModalLink client:load />
+                      </li>
+                    </ul>
+                </div>
+            </li>
+          </ul>
+        </div>
+        )}
+      </div>
+      {!user && (
+        <div class="flex items-center">
+          <div class="ml-3 flex items-center">
+            <a href="/login" class="inline-flex items-center justify-center rounded-full bg-gray-600 p-1 text-white">
+              <span class="sr-only">ログイン</span>
+              <Icon class="h-8 w-8" name="mdi:account-lock" />
+            </a>
+          </div>
+        </div>
+      )}
+      {user && (
+        <div class="flex items-center">
+          <!-- Profile -->
+          <div class="ml-3 flex items-center">
+            <button
+              type="button"
+              class="inline-flex items-center justify-center rounded-full bg-blue-600 p-1 text-white"
+              aria-expanded="false"
+              data-dropdown-toggle="dropdown-2"
+              aria-label="userアイコン"
+            >
+              <span class="sr-only">Open user menu</span>
+              <Icon class="h-8 w-8" name="mdi:account" />
+            </button>
+            <!-- Dropdown menu -->
+            <div
+              class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded bg-white text-base shadow ring-1 ring-black ring-opacity-5"
+              id="dropdown-2"
+            >
+              <div class="px-4 py-3" role="none">
+                <p class="text-gray-900" role="none">{user.name}</p>
+                <p class="truncate text-gray-900" role="none">
+                  {user.email}
+                </p>
+              </div>
+              <ul class="py-1" role="none">
+                <li>
+                  <a
+                    id="logout"
+                    href="#"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    role="menuitem">ログアウト</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</nav>
+<script>
+  import AuthFetch from '@/fetch/auth.ts'
+
+  const buttonLogout = document.querySelector('#logout')
+  buttonLogout?.addEventListener('click', async () => {
+    const result = await AuthFetch.logout()
+    if (result) window.location.href = '/'
+  })
+</script>

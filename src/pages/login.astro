@@ -1,0 +1,10 @@
+---
+import Layout from '@/layouts/MainLayout.astro'
+import Login from '@/components/Login'
+---
+
+<Layout title="ログイン">
+  <main class="mx-auto max-w-md pt-10">
+    <Login client:only="react" />
+  </main>
+</Layout>

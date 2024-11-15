@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 日付セル */
+.fc-daygrid-day {
+  height: 15vh; /* デフォルトの高さを設定 */
+}
+
+/*
+th.fc-day-sat {
+  background-color: #eaf4ff;
+}
+th.fc-day-sun {
+  background-color: #ffeaea;
+}*/
+th.fc-day-sat .fc-col-header-cell-cushion {
+  @apply text-blue-500;
+}
+th.fc-day-sun .fc-col-header-cell-cushion {
+  @apply text-red-500;
+}
+/*
+td.fc-day-sat {
+  background-color: #eaf4ff;
+}
+td.fc-day-sun {
+  background-color: #ffeaea;
+}
+.fc-col-header-cell-cushion {
+  color: black;
+}
+.fc-daygrid-day-number {
+  color: black;
+}
+*/
+
+td.fc-day-sat .fc-daygrid-day-number {
+  @apply text-blue-500;
+}
+td.fc-day-sun .fc-daygrid-day-number {
+  @apply text-red-500;
+}
+
+.holiday-label {
+  @apply text-red-500;
+}
+.holiday-number {
+  @apply text-red-500;
+}
+.fc-daygrid-day-number {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  width: 100%;
+}
+/*
+  .fc-header-toolbar {
+    display: inline-block;
+    padding: 4px 4px;
+    
+    @apply space-x-8;
+}
+
+.fc-day {
+  @apply m-8;
+}
+
+.fc-scrollgrid-sync-table {
+  @apply w-full;
+}
+
+.fc-view {
+  @apply w-full h-full lg:h-3/4 xl:h-2/3 bg-white;
+}
+
+.fc-h-event {
+  @apply bg-violet-500 border border-violet-600 ;
+  
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-violet-100 ;
+}
+
+.fc .fc-button{
+  @apply bg-violet-800 hover:bg-violet-900  ;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  @apply bg-violet-600;
+}
+
+.fc .fc-button-primary:disabled {
+  @apply bg-violet-600;
+}
+.fc-v-event {
+  @apply bg-violet-500 border border-violet-600 ;
+  
+}
+  */
+/*full-calendar-shadcn.css*/
+
+/*
+  FULLCALENDAR 
+*/
+/*
+.fc-button {
+  @apply py-1 px-2.5 bg-growp-500 hover:bg-gray-950 m-0 h-[36px] border-none focus:ring-1 focus:ring-growp-900 focus:outline-1 focus:outline-growp-900 !important
+}*/
+/*
+.fc-button-group {
+  @apply space-x-0 !important
+}
+
+.fc-toolbar-chunk {
+  @apply space-x-4 !important
+}
+
+.fc-today-button:disabled {
+  @apply bg-gray-800/50 !important
+}
+
+.fc-today-button.fc-button-primary:not(.fc-today-button:disabled) {
+  @apply bg-growp-900 hover:bg-gray-950 transition-colors !important
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th,
+.fc-theme-standard .fc-scrollgrid {
+  @apply border-gray-600/10 !important;
+}
+
+.fc-button.fc-button-primary.fc-button-active {
+  @apply bg-gray-800 !important;
+}
+
+.fc-toolbar-title {
+  @apply text-center text-xl font-semibold !important
+}
+
+.fc-day.fc-day-fri.fc-day-today.fc-daygrid-day {
+  @apply bg-sky-900/60 !important
+}
+
+.fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
+  @apply w-full md:min-w-[450px] !important
+}
+
+.fc-highlight {
+  @apply bg-sky-400/10 !important
+}
+
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+  @apply flex md:flex-row flex-col-reverse md:items-center items-start md:justify-between justify-start gap-2 !important
+}
+
+.fc-popover {
+  @apply z-[1] !important
+}
+*/
+/* Fullcalendar visualização em lista */
+/*
+.fc .fc-list-sticky .fc-list-day > th {
+  @apply bg-growp-500 text-white !important
+}
+.fc-theme-standard .fc-list-day-cushion{
+  @apply bg-none !important
+}
+.fc-listMonth-view,
+.fc-dayGridWeek-view.fc-view.fc-daygrid {
+  @apply bg-transparent text-gray-500 !important
+}
+
+.fc-list-event:hover {
+  @apply text-growp-500 cursor-pointer !important
+}
+
+.fc-dayGridDay-view.fc-view.fc-daygrid .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
+  @apply bg-gray-900 !important
+}
+
+.fc-popover-header {
+  @apply bg-gray-900 text-gray-400 !important
+}
+
+.fc-popover-body {
+  @apply bg-gray-900 !important
+}
+  */
+
+/* Toolbar */
+.fc-toolbar-chunk {
+  .fc-button {
+    @apply inline-flex items-center rounded-md border-none bg-primary-500 px-3 py-2 text-sm font-semibold text-white ring-0 hover:bg-primary-600;
+  }
+  .fc-button:disabled {
+    @apply cursor-auto bg-primary-400;
+  }
+  .fc-button:not(:disabled):active {
+    @apply bg-primary-500;
+  }
+  /*
+  .fc-button:not(:disabled):focus {
+    @apply shadow-none;
+  }
+  .fc-button:not(:disabled):active:focus {
+    @apply shadow-none;
+  }*/
+
+  .fc-button.fc-button-primary.fc-button-active {
+    @apply bg-primary-700;
+  }
+}
+.fc-event {
+  margin-bottom: 2px;
+}
+.fc-event.fc-daygrid-dot-event {
+  @apply border-pink-500 bg-pink-500 align-middle text-white;
+  padding: 2px 5px;
+}
+.fc-event.fc-daygrid-block-event {
+  @apply border-green-600 bg-green-600 align-middle;
+  padding: 2px 5px;
+}
+/*
+.fc-non-business {
+  @apply bg-gray-400 bg-opacity-30;
+}
+  */
+/* 日付のセルを拡大するポップアップ用 */
+.fc-popover-header {
+  @apply bg-gray-500 text-white !important;
+}
+.fc-more-popover-misc {/* 日付の数値を非表示にする */
+  display: none;
+}
+
+/* ツールチップ用 */
+/*
+.tooltip-text {
+  @apply bg-gray-700 text-white text-xs rounded py-1 px-2 bottom-full left-1/2 transform -translate-x-1/2 mb-1 opacity-90 transition-opacity duration-300;
+  white-space: nowrap;
+  z-index: 10;
+  height: 1.5rem;
+}*/
+
