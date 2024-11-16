@@ -8,65 +8,25 @@ generator client {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
-  email     String    @unique
+  email     String   @unique
   password  String
   role      String
-  createdAt DateTime  @default(now())
-  isGuest   Boolean   @default(false)
+  createdAt DateTime @default(now())
+  isGuest   Boolean  @default(false)
   Events    Event[]
-  Votes     Vote[]
-  Comments  Comment[]
 }
 
 model Event {
-  id          Int        @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
   description String?
   start       DateTime
   end         DateTime
-  isAllDay    Boolean    @default(false)
-  categoryId  Int        @default(0)
+  isAllDay    Boolean  @default(false)
+  categoryId  Int      @default(0)
   creatorId   Int
-  createdAt   DateTime   @default(now())
-  creator     User       @relation(fields: [creatorId], references: [id])
-  Proposals   Proposal[]
-  Comments    Comment[]
-}
-
-model Proposal {
-  id           Int       @id @default(autoincrement())
-  eventId      Int
-  proposedText String?
-  proposedTime DateTime?
-  createdAt    DateTime  @default(now())
-  event        Event     @relation(fields: [eventId], references: [id])
-  Votes        Vote[]
-}
-
-model Vote {
-  id         Int      @id @default(autoincrement())
-  proposalId Int
-  userId     Int
-  voteTypeId Int
-  proposal   Proposal @relation(fields: [proposalId], references: [id])
-  user       User     @relation(fields: [userId], references: [id])
-  voteType   VoteType @relation(fields: [voteTypeId], references: [id])
-}
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String
-  createdAt DateTime @default(now())
-  eventId   Int
-  userId    Int
-  event     Event    @relation(fields: [eventId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-}
-
-model VoteType {
-  id    Int    @id @default(autoincrement())
-  type  String @unique
-  Votes Vote[]
+  createdAt   DateTime @default(now())
+  creator     User     @relation(fields: [creatorId], references: [id])
 }
