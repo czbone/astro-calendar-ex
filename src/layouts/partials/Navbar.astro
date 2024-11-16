@@ -3,6 +3,7 @@ import EventModalLink from '@/components/event/EventModalLink'
 import { Icon } from 'astro-icon/components'
 import UserStoreInitializer from '@/components/UserStoreInitializer'
 import { convertToUserAuth } from '@/types/user'
+import config from "@/config/config.json"
 
 const user = Astro.locals.user
 const userAuth = user ? convertToUserAuth(user) : null  // ユーザ認証情報
@@ -15,9 +16,9 @@ const userAuth = user ? convertToUserAuth(user) : null  // ユーザ認証情報
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start">
         <a href="/" class="ml-2 flex md:mr-24">
-          <img class="mr-3 h-auto w-10" src="/images/logo.png" alt="siteロゴ" />
+          <img class="mr-3 h-auto w-10" src={config.site.logo} alt="siteロゴ" />
           <span class="self-center whitespace-nowrap text-xl font-semibold sm:text-2xl"
-            >AstroQuest</span
+            >{config.site.title}</span
           >
         </a>
         {user && (
