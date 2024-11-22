@@ -8,7 +8,9 @@ const config = {
 
   SESSION_COOKIE_NAME: import.meta.env.SESSION_COOKIE_NAME || '__session', // クッキー作成用シークレットコード
   SESSION_COOKIE_SECRET: import.meta.env.SESSION_COOKIE_SECRET || 'secret',
-  SESSION_EXPIRES: parseInt(import.meta.env.SESSION_EXPIRES || '60 * 30', 10), // 30分
+  SESSION_EXPIRES: import.meta.env.SESSION_EXPIRES
+    ? parseInt(import.meta.env.SESSION_EXPIRES, 10)
+    : 60 * 30, // 30分
   SESSION_ID_PREFIX: import.meta.env.SESSION_ID_PREFIX || 'sess:', // Redisセッション保存用セッションIDプレフィックス
   SESSION_REDIS_URL: import.meta.env.SESSION_REDIS_URL || 'redis://localhost:6379/'
 }
