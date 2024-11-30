@@ -8,14 +8,16 @@ generator client {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  role      String
-  createdAt DateTime @default(now())
-  isGuest   Boolean  @default(false)
-  Events    Event[]
+  id                    Int       @id @default(autoincrement())
+  name                  String
+  email                 String    @unique
+  password              String
+  rememberMeToken       String?   @unique
+  rememberMeTokenExpiry DateTime?
+  role                  String
+  createdAt             DateTime  @default(now())
+  isGuest               Boolean   @default(false)
+  Events                Event[]
 }
 
 model Event {

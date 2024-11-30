@@ -12,6 +12,13 @@ const config = {
     ? parseInt(import.meta.env.SESSION_EXPIRES, 10)
     : 60 * 30, // 30分
   SESSION_ID_PREFIX: import.meta.env.SESSION_ID_PREFIX || 'sess:', // Redisセッション保存用セッションIDプレフィックス
-  SESSION_REDIS_URL: import.meta.env.SESSION_REDIS_URL || 'redis://localhost:6379/'
+  SESSION_REDIS_URL: import.meta.env.SESSION_REDIS_URL || 'redis://localhost:6379/',
+
+  REMEMBERME_COOKIE_NAME: import.meta.env.REMEMBERME_COOKIE_NAME || '__rememberme', // クッキー作成用シークレットコード
+  REMEMBERME_COOKIE_SECRET: import.meta.env.AUTH_REMEMBERME_COOKIE_SECRET || 'rememberm_secret',
+  REMEMBERME_COOKIE_DAYS: import.meta.env.AUTH_REMEMBERME_COOKIE_DAYS || 120, // 120日
+  REMEMBERME_EXPIRES: import.meta.env.AUTH_REMEMBERME_EXPIRES
+    ? parseInt(import.meta.env.AUTH_REMEMBERME_EXPIRES, 10)
+    : 60 * 60 * 24 * 120 // 120日
 }
 export default config

@@ -1,4 +1,5 @@
 import { UserDB } from '@/server/db'
+import Auth from '@/server/utils/auth'
 import { verify } from '@/server/utils/password'
 import Session from '@/server/utils/session'
 import type { UserSessionData } from '@/types/user'
@@ -24,6 +25,7 @@ export const POST: APIRoute = async (context) => {
     const body = await request.json()
     const email = body.email
     const password = body.password
+    const rememberMe = body.rememberMe
 
     if (!email || !password) {
       return new Response(
@@ -65,6 +67,11 @@ export const POST: APIRoute = async (context) => {
     // セッション(ユーザ情報)作成
     const sessionData: UserSessionData = convertToUserSessionData(userWithPassword)
     await Session.createUser(context, sessionData)
+
+    if (rememberMe) {
+      // remember me トークン作成
+      await Auth.createRememberMe(context, userWithPassword.id)
+    }
 
     return new Response(
       JSON.stringify({

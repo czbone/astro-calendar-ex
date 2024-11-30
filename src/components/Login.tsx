@@ -5,6 +5,7 @@ import { type FormEventHandler, useState } from 'react'
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(false)
   const [error, setError] = useState('')
 
   const login: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -12,7 +13,7 @@ export default function Login() {
     event.preventDefault()
 
     // ログイン処理
-    const response = await AuthFetch.login(email, password)
+    const response = await AuthFetch.login(email, password, rememberMe)
     if (response) {
       if (response.status === 200) {
         // ログイン成功の場合
@@ -58,6 +59,19 @@ export default function Login() {
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-500 focus:ring-primary-500"
             required
           />
+        </div>
+        <div>
+          <label htmlFor="rememberMe" className="inline-flex items-center">
+            <input
+              type="checkbox"
+              name="rememberMe"
+              id="rememberMe"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+            />
+            <span className="ml-2 text-gray-900">ログイン状態を保持する</span>
+          </label>
         </div>
         <button
           type="submit"

@@ -1,5 +1,5 @@
 class AuthFetch {
-  async login(email: string, password: string): Promise<any> {
+  async login(email: string, password: string, rememberMe: boolean): Promise<any> {
     try {
       const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/auth/login`, {
         method: 'POST',
@@ -8,7 +8,8 @@ class AuthFetch {
         },
         body: JSON.stringify({
           email: email,
-          password: password
+          password: password,
+          rememberMe: rememberMe
         })
       })
       return response

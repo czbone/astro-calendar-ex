@@ -58,14 +58,23 @@ class Session {
   }
 
   // セッション情報を削除
-  async deleteUser(context: APIContext): Promise<boolean> {
+  // 戻り値: ユーザID - セッション情報が存在しない場合は-1
+  async deleteUser(context: APIContext): Promise<number> {
+    let userId = -1
+
     // クッキー取得
     const cookie = context.cookies.get(config.SESSION_COOKIE_NAME)?.value
-    if (!cookie) return false
+    if (!cookie) return userId
 
-    // セッションID取得
+    // セッション取得
     const unsignedSession = _unsign(cookie, config.SESSION_COOKIE_SECRET)
     if (unsignedSession) {
+      // セッションからユーザID取得
+      const result = await context.locals.session.get(config.SESSION_ID_PREFIX + unsignedSession)
+      if (result) {
+        userId = result.user.id
+      }
+
       // セッション破棄
       await context.locals.session.destroy(config.SESSION_ID_PREFIX + unsignedSession)
     }
@@ -78,7 +87,7 @@ class Session {
       secure: import.meta.env.PROD
     })
 
-    return true
+    return userId
   }
 }
 
