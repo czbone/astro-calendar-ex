@@ -54,8 +54,6 @@ class Auth {
   // 「remember me」情報を削除
   // ユーザIDが無効値でもクッキーは削除する
   async removeRememberMe(context: APIContext, userId: number) {
-    console.log('DELETE removeRememberMe: ', userId)
-
     // ユーザ情報の「remember me」トークンをクリア
     if (userId > 0) await UserDB.updateRememberMe(userId, null, null)
 
